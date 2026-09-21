@@ -3,6 +3,7 @@
 <html lang="en">
 
 <head>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -11,14 +12,16 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap"
+        rel="stylesheet">
 
-    <!-- =========================
-         CSS
-    ========================== -->
 
     <style>
+
+        /* =====================================================
+           GLOBAL
+        ===================================================== */
 
         * {
             margin: 0;
@@ -32,544 +35,1576 @@
 
         body {
             font-family: "Inter", sans-serif;
-            background: #050807;
-            color: #e8f5ef;
+            background: #02030b;
+            color: #edf7ff;
             line-height: 1.7;
+            overflow-x: hidden;
         }
 
         :root {
-            --green: #00ff9c;
-            --dark-green: #00c77b;
-            --background: #050807;
-            --card: #0b1210;
-            --border: rgba(0, 255, 156, 0.18);
-            --text-muted: #91a69c;
+
+            --cyan: #00e5ff;
+            --blue: #008cff;
+            --purple: #9d4edd;
+            --bright-purple: #c77dff;
+
+            --background: #02030b;
+
+            --card: rgba(5, 10, 25, 0.78);
+
+            --border: rgba(0, 200, 255, 0.22);
+
+            --text-muted: #9baabd;
+
+            --white: #f2f8ff;
         }
 
 
-        /* =========================
+        /* =====================================================
+           FUTURISTIC CYBER BACKGROUND
+        ===================================================== */
+
+        .cyber-background {
+
+            position: fixed;
+
+            inset: 0;
+
+            width: 100%;
+            height: 100%;
+
+            overflow: hidden;
+
+            z-index: 0;
+
+            pointer-events: none;
+
+            background:
+
+                radial-gradient(
+                    circle at 20% 30%,
+                    rgba(120, 40, 255, 0.18),
+                    transparent 30%
+                ),
+
+                radial-gradient(
+                    circle at 80% 20%,
+                    rgba(0, 140, 255, 0.18),
+                    transparent 30%
+                ),
+
+                radial-gradient(
+                    circle at 50% 80%,
+                    rgba(0, 255, 255, 0.09),
+                    transparent 35%
+                ),
+
+                #02030b;
+        }
+
+
+        /* =====================================================
+           MOVING CYBER GRID
+        ===================================================== */
+
+        .cyber-grid {
+
+            position: absolute;
+
+            width: 200%;
+            height: 200%;
+
+            left: -50%;
+            top: -30%;
+
+            background-image:
+
+                linear-gradient(
+                    rgba(0, 180, 255, 0.09) 1px,
+                    transparent 1px
+                ),
+
+                linear-gradient(
+                    90deg,
+                    rgba(120, 50, 255, 0.09) 1px,
+                    transparent 1px
+                );
+
+            background-size: 65px 65px;
+
+            transform:
+                perspective(600px)
+                rotateX(60deg);
+
+            animation:
+                cyberGridMove 18s linear infinite;
+        }
+
+
+        @keyframes cyberGridMove {
+
+            0% {
+
+                transform:
+                    perspective(600px)
+                    rotateX(60deg)
+                    translateY(0);
+
+            }
+
+            100% {
+
+                transform:
+                    perspective(600px)
+                    rotateX(60deg)
+                    translateY(65px);
+
+            }
+
+        }
+
+
+        /* =====================================================
+           MOVING GLOWS
+        ===================================================== */
+
+        .glow {
+
+            position: absolute;
+
+            width: 450px;
+            height: 450px;
+
+            border-radius: 50%;
+
+            filter: blur(110px);
+
+            pointer-events: none;
+        }
+
+
+        /* Purple */
+
+        .glow-1 {
+
+            top: 5%;
+            left: -5%;
+
+            background:
+                rgba(150, 40, 255, 0.20);
+
+            animation:
+                purpleGlow 10s ease-in-out infinite alternate;
+        }
+
+
+        @keyframes purpleGlow {
+
+            0% {
+
+                transform:
+                    translate(0, 0)
+                    scale(1);
+
+            }
+
+            50% {
+
+                transform:
+                    translate(180px, 120px)
+                    scale(1.2);
+
+            }
+
+            100% {
+
+                transform:
+                    translate(80px, 250px)
+                    scale(0.9);
+
+            }
+
+        }
+
+
+        /* Blue */
+
+        .glow-2 {
+
+            right: -5%;
+            bottom: 0;
+
+            background:
+                rgba(0, 130, 255, 0.20);
+
+            animation:
+                blueGlow 12s ease-in-out infinite alternate;
+        }
+
+
+        @keyframes blueGlow {
+
+            0% {
+
+                transform:
+                    translate(0, 0)
+                    scale(1);
+
+            }
+
+            50% {
+
+                transform:
+                    translate(-150px, -150px)
+                    scale(1.2);
+
+            }
+
+            100% {
+
+                transform:
+                    translate(-250px, -50px)
+                    scale(0.9);
+
+            }
+
+        }
+
+
+        /* =====================================================
+           PARTICLES
+        ===================================================== */
+
+        .particles span {
+
+            position: absolute;
+
+            width: 4px;
+            height: 4px;
+
+            border-radius: 50%;
+
+            background: var(--cyan);
+
+            box-shadow:
+
+                0 0 8px var(--cyan),
+
+                0 0 18px rgba(0, 180, 255, 0.8);
+
+            animation:
+                particleFloat 6s ease-in-out infinite;
+        }
+
+
+        /* Particle positions */
+
+        .particles span:nth-child(1) {
+            top: 10%;
+            left: 8%;
+            animation-delay: 0s;
+        }
+
+        .particles span:nth-child(2) {
+            top: 25%;
+            left: 18%;
+            animation-delay: 1s;
+        }
+
+        .particles span:nth-child(3) {
+            top: 70%;
+            left: 10%;
+            animation-delay: 2s;
+        }
+
+        .particles span:nth-child(4) {
+            top: 15%;
+            left: 35%;
+            animation-delay: 0.5s;
+        }
+
+        .particles span:nth-child(5) {
+            top: 80%;
+            left: 28%;
+            animation-delay: 1.5s;
+        }
+
+        .particles span:nth-child(6) {
+            top: 12%;
+            left: 55%;
+            animation-delay: 2.5s;
+        }
+
+        .particles span:nth-child(7) {
+            top: 40%;
+            left: 72%;
+            animation-delay: 1s;
+        }
+
+        .particles span:nth-child(8) {
+            top: 75%;
+            left: 88%;
+            animation-delay: 3s;
+        }
+
+        .particles span:nth-child(9) {
+            top: 20%;
+            left: 92%;
+            animation-delay: 2s;
+        }
+
+        .particles span:nth-child(10) {
+            top: 60%;
+            left: 55%;
+            animation-delay: 1.2s;
+        }
+
+        .particles span:nth-child(11) {
+            top: 88%;
+            left: 65%;
+            animation-delay: 2.2s;
+        }
+
+        .particles span:nth-child(12) {
+            top: 45%;
+            left: 40%;
+            animation-delay: 0.8s;
+        }
+
+        .particles span:nth-child(13) {
+            top: 55%;
+            left: 20%;
+            animation-delay: 2.8s;
+        }
+
+        .particles span:nth-child(14) {
+            top: 90%;
+            left: 12%;
+            animation-delay: 1.8s;
+        }
+
+        .particles span:nth-child(15) {
+            top: 35%;
+            left: 82%;
+            animation-delay: 0.3s;
+        }
+
+        .particles span:nth-child(16) {
+            top: 65%;
+            left: 94%;
+            animation-delay: 2.5s;
+        }
+
+
+        @keyframes particleFloat {
+
+            0% {
+
+                transform:
+                    translate(0, 0)
+                    scale(0.7);
+
+                opacity: 0.2;
+            }
+
+            25% {
+
+                transform:
+                    translate(20px, -30px)
+                    scale(1.2);
+
+                opacity: 0.8;
+            }
+
+            50% {
+
+                transform:
+                    translate(-20px, -70px)
+                    scale(1.5);
+
+                opacity: 1;
+            }
+
+            75% {
+
+                transform:
+                    translate(30px, -100px)
+                    scale(1);
+
+                opacity: 0.7;
+            }
+
+            100% {
+
+                transform:
+                    translate(0, 0)
+                    scale(0.7);
+
+                opacity: 0.2;
+            }
+
+        }
+
+
+        /* =====================================================
+           CYBER WAVE
+        ===================================================== */
+
+        .cyber-background::before {
+
+            content: "";
+
+            position: absolute;
+
+            width: 150%;
+            height: 300px;
+
+            left: -25%;
+            top: 35%;
+
+            border-radius: 50%;
+
+            border-top:
+                2px solid rgba(0, 200, 255, 0.25);
+
+            border-bottom:
+                2px solid rgba(150, 50, 255, 0.18);
+
+            filter: blur(2px);
+
+            transform: rotate(-5deg);
+
+            animation:
+                cyberWave 8s ease-in-out infinite alternate;
+        }
+
+
+        @keyframes cyberWave {
+
+            0% {
+
+                transform:
+                    translateX(-8%)
+                    rotate(-5deg)
+                    scaleY(0.8);
+
+            }
+
+            50% {
+
+                transform:
+                    translateX(5%)
+                    rotate(2deg)
+                    scaleY(1.2);
+
+            }
+
+            100% {
+
+                transform:
+                    translateX(10%)
+                    rotate(-3deg)
+                    scaleY(0.9);
+
+            }
+
+        }
+
+
+        /* =====================================================
+           CENTER VIGNETTE
+        ===================================================== */
+
+        .cyber-background::after {
+
+            content: "";
+
+            position: absolute;
+
+            inset: 0;
+
+            background:
+
+                radial-gradient(
+                    circle at center,
+                    transparent 25%,
+                    rgba(0, 0, 10, 0.45) 75%,
+                    rgba(0, 0, 10, 0.82) 100%
+                );
+
+            pointer-events: none;
+        }
+
+
+        /* =====================================================
+           CONTENT ABOVE BACKGROUND
+        ===================================================== */
+
+        header,
+        section,
+        footer {
+
+            position: relative;
+
+            z-index: 2;
+        }
+
+
+        /* =====================================================
            NAVBAR
-        ========================== */
+        ===================================================== */
 
         header {
+
             position: fixed;
+
             width: 100%;
+
             top: 0;
+
             z-index: 1000;
-            background: rgba(5, 8, 7, 0.88);
-            backdrop-filter: blur(15px);
-            border-bottom: 1px solid var(--border);
+
+            background:
+                rgba(2, 4, 14, 0.78);
+
+            backdrop-filter:
+                blur(18px);
+
+            border-bottom:
+                1px solid var(--border);
         }
 
+
         .navbar {
+
             max-width: 1200px;
+
             margin: auto;
+
             padding: 18px 25px;
 
             display: flex;
+
             justify-content: space-between;
+
             align-items: center;
         }
 
+
         .logo {
+
             color: white;
+
             text-decoration: none;
-            font-family: "Space Mono", monospace;
+
+            font-family:
+                "Space Mono",
+                monospace;
+
             font-weight: bold;
+
             font-size: 20px;
+
+            text-shadow:
+                0 0 12px
+                rgba(0, 229, 255, 0.4);
         }
+
 
         .logo span {
-            color: var(--green);
+
+            color: var(--cyan);
+
+            text-shadow:
+                0 0 12px var(--cyan);
         }
 
+
         .nav-links {
+
             display: flex;
+
             gap: 30px;
+
             list-style: none;
         }
 
+
         .nav-links a {
-            color: #c6d5ce;
+
+            color: #c8d5e3;
+
             text-decoration: none;
+
             font-size: 14px;
+
+            transition: 0.3s;
+
+            position: relative;
+        }
+
+
+        .nav-links a::after {
+
+            content: "";
+
+            position: absolute;
+
+            left: 0;
+
+            bottom: -7px;
+
+            width: 0;
+
+            height: 2px;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    var(--cyan),
+                    var(--purple)
+                );
+
             transition: 0.3s;
         }
 
+
         .nav-links a:hover {
-            color: var(--green);
+
+            color: var(--cyan);
+
+            text-shadow:
+                0 0 10px
+                rgba(0, 229, 255, 0.5);
         }
 
+
+        .nav-links a:hover::after {
+
+            width: 100%;
+        }
+
+
         .menu-btn {
+
             display: none;
+
             background: none;
-            color: var(--green);
+
+            color: var(--cyan);
+
             border: none;
+
             font-size: 25px;
+
             cursor: pointer;
         }
 
 
-        /* =========================
+        /* =====================================================
            HERO
-        ========================== */
+        ===================================================== */
 
         .hero {
+
             min-height: 100vh;
+
             max-width: 1200px;
+
             margin: auto;
-            padding: 150px 25px 80px;
+
+            padding:
+                150px 25px 80px;
 
             display: flex;
+
             align-items: center;
+
             justify-content: space-between;
+
             gap: 60px;
         }
 
+
         .hero-content {
+
             max-width: 650px;
         }
 
+
         .terminal-text {
-            font-family: "Space Mono", monospace;
-            color: var(--green);
+
+            font-family:
+                "Space Mono",
+                monospace;
+
+            color: var(--cyan);
+
             margin-bottom: 20px;
+
+            text-shadow:
+                0 0 12px
+                rgba(0, 229, 255, 0.6);
         }
+
 
         .hero h1 {
-            font-size: clamp(45px, 7vw, 80px);
+
+            font-size:
+                clamp(45px, 7vw, 80px);
+
             line-height: 1.1;
+
+            letter-spacing: -2px;
         }
+
 
         .hero h1 span {
-            color: var(--green);
+
+            color: var(--cyan);
+
+            text-shadow:
+
+                0 0 15px
+                rgba(0, 229, 255, 0.4),
+
+                0 0 35px
+                rgba(0, 140, 255, 0.2);
         }
+
 
         .hero h2 {
+
             margin-top: 15px;
+
             font-size: 30px;
-            color: #c8d7d0;
+
+            color: #d2deea;
         }
+
 
         .hero-description {
+
             color: var(--text-muted);
+
             margin-top: 20px;
+
             max-width: 600px;
+
+            font-size: 16px;
         }
 
+
         .hero-buttons {
+
             margin-top: 35px;
+
             display: flex;
+
             gap: 15px;
         }
 
+
         .btn {
-            padding: 12px 22px;
+
+            padding:
+                12px 22px;
+
             border-radius: 5px;
+
             text-decoration: none;
+
             font-weight: 600;
+
             transition: 0.3s;
+
+            display: inline-block;
         }
+
 
         .primary {
-            background: var(--green);
-            color: #03110b;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    var(--cyan),
+                    var(--blue)
+                );
+
+            color: #001018;
+
+            box-shadow:
+                0 0 20px
+                rgba(0, 229, 255, 0.25);
         }
+
 
         .primary:hover {
-            transform: translateY(-3px);
+
+            transform:
+                translateY(-3px);
+
+            box-shadow:
+                0 0 30px
+                rgba(0, 229, 255, 0.45);
         }
+
 
         .secondary {
-            color: var(--green);
-            border: 1px solid var(--green);
+
+            color: var(--cyan);
+
+            border:
+                1px solid var(--cyan);
+
+            background:
+                rgba(0, 229, 255, 0.03);
         }
+
 
         .secondary:hover {
-            background: rgba(0, 255, 156, 0.1);
+
+            background:
+                rgba(0, 229, 255, 0.1);
+
+            box-shadow:
+                0 0 20px
+                rgba(0, 229, 255, 0.15);
         }
 
 
-        /* =========================
+        /* =====================================================
            HERO VISUAL
-        ========================== */
+        ===================================================== */
 
         .hero-visual {
+
             position: relative;
+
             width: 400px;
+
+            min-width: 350px;
         }
 
+
         .shield {
+
             width: 270px;
             height: 320px;
+
             margin: auto;
 
             display: flex;
+
             align-items: center;
+
             justify-content: center;
 
-            background: rgba(0, 255, 156, 0.04);
-            border: 1px solid var(--border);
+            background:
 
-            clip-path: polygon(
-                50% 0%,
-                90% 15%,
-                85% 65%,
-                50% 100%,
-                15% 65%,
-                10% 15%
-            );
+                linear-gradient(
+                    145deg,
+                    rgba(0, 229, 255, 0.08),
+                    rgba(157, 78, 221, 0.08)
+                );
 
-            animation: floating 4s ease-in-out infinite;
+            border:
+                1px solid
+                rgba(0, 229, 255, 0.4);
+
+            clip-path:
+                polygon(
+                    50% 0%,
+                    90% 15%,
+                    85% 65%,
+                    50% 100%,
+                    15% 65%,
+                    10% 15%
+                );
+
+            animation:
+                floating 4s ease-in-out infinite;
+
+            box-shadow:
+                0 0 40px
+                rgba(0, 200, 255, 0.12);
         }
+
 
         .shield-icon {
+
             font-size: 90px;
+
+            filter:
+                drop-shadow(
+                    0 0 18px
+                    rgba(0, 229, 255, 0.7)
+                );
         }
 
+
         .code-card {
+
             position: absolute;
+
             bottom: -30px;
+
             right: 0;
 
-            background: #08100d;
-            border: 1px solid var(--border);
+            background:
+                rgba(3, 8, 18, 0.88);
+
+            border:
+                1px solid
+                rgba(0, 229, 255, 0.25);
 
             padding: 20px;
 
-            font-family: "Space Mono", monospace;
+            font-family:
+                "Space Mono",
+                monospace;
+
             font-size: 12px;
 
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+            box-shadow:
+                0 20px 50px
+                rgba(0, 0, 0, 0.5),
+
+                0 0 25px
+                rgba(0, 150, 255, 0.08);
+
+            backdrop-filter:
+                blur(12px);
         }
+
 
         .green {
-            color: var(--green);
+
+            color: var(--cyan);
+
+            text-shadow:
+                0 0 8px
+                rgba(0, 229, 255, 0.4);
         }
+
 
         .purple {
-            color: #c792ea;
+
+            color:
+                var(--bright-purple);
         }
 
+
         .indent {
+
             padding-left: 25px;
         }
+
 
         @keyframes floating {
 
             0%,
             100% {
-                transform: translateY(0);
+
+                transform:
+                    translateY(0);
             }
 
             50% {
-                transform: translateY(-15px);
+
+                transform:
+                    translateY(-15px);
             }
         }
 
 
-        /* =========================
+        /* =====================================================
            SECTIONS
-        ========================== */
+        ===================================================== */
 
         .section {
+
             max-width: 1200px;
+
             margin: auto;
-            padding: 110px 25px;
+
+            padding:
+                110px 25px;
         }
+
 
         .dark-section {
-            max-width: none;
-            padding-left: max(25px, calc((100% - 1150px) / 2));
-            padding-right: max(25px, calc((100% - 1150px) / 2));
 
-            background: #080e0c;
+            max-width: none;
+
+            padding-left:
+                max(
+                    25px,
+                    calc((100% - 1150px) / 2)
+                );
+
+            padding-right:
+                max(
+                    25px,
+                    calc((100% - 1150px) / 2)
+                );
+
+            background:
+                rgba(3, 7, 18, 0.45);
+
+            border-top:
+                1px solid
+                rgba(0, 180, 255, 0.05);
+
+            border-bottom:
+                1px solid
+                rgba(150, 50, 255, 0.05);
         }
 
+
         .section-title {
+
             margin-bottom: 50px;
         }
 
+
         .section-title p {
-            color: var(--green);
-            font-family: "Space Mono", monospace;
+
+            color: var(--cyan);
+
+            font-family:
+                "Space Mono",
+                monospace;
+
             font-size: 13px;
+
+            text-shadow:
+                0 0 8px
+                rgba(0, 229, 255, 0.4);
         }
 
+
         .section-title h2 {
+
             font-size: 40px;
+
             margin-top: 5px;
         }
 
 
-        /* =========================
+        /* =====================================================
            ABOUT
-        ========================== */
+        ===================================================== */
 
         .about-container {
+
             display: grid;
-            grid-template-columns: 1fr 1fr;
+
+            grid-template-columns:
+                1fr 1fr;
+
             gap: 60px;
         }
 
+
         .about-text p {
+
             color: var(--text-muted);
+
             margin-bottom: 18px;
         }
 
+
         .about-text strong {
+
             color: white;
         }
 
+
         .info-box {
+
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
             margin-top: 30px;
-            border: 1px solid var(--border);
+
+            border:
+                1px solid
+                var(--border);
+
+            background:
+                rgba(0, 120, 255, 0.025);
         }
+
 
         .info-box div {
+
             padding: 20px;
-            border-right: 1px solid var(--border);
+
+            border-right:
+                1px solid
+                var(--border);
         }
 
+
         .info-box div:last-child {
+
             border-right: none;
         }
 
+
         .info-box span {
+
             display: block;
-            color: var(--text-muted);
+
+            color:
+                var(--text-muted);
+
             font-size: 12px;
         }
 
+
         .info-box strong {
+
             display: block;
+
             margin-top: 5px;
+
             font-size: 14px;
         }
 
 
-        /* =========================
+        /* =====================================================
            TERMINAL
-        ========================== */
+        ===================================================== */
 
         .about-terminal {
-            border: 1px solid var(--border);
-            background: #030605;
+
+            border:
+                1px solid
+                var(--border);
+
+            background:
+                rgba(1, 5, 12, 0.85);
+
             border-radius: 8px;
+
             overflow: hidden;
+
+            box-shadow:
+                0 20px 50px
+                rgba(0, 0, 0, 0.25);
         }
+
 
         .terminal-header {
+
             padding: 12px;
-            background: #0c1411;
+
+            background:
+                rgba(10, 20, 35, 0.9);
+
+            border-bottom:
+                1px solid
+                rgba(0, 200, 255, 0.08);
         }
 
+
         .terminal-header span {
+
             margin-right: 5px;
+
             font-size: 10px;
         }
 
+
+        .terminal-header span:nth-child(1) {
+            color: #ff5f56;
+        }
+
+        .terminal-header span:nth-child(2) {
+            color: #ffbd2e;
+        }
+
+        .terminal-header span:nth-child(3) {
+            color: #27c93f;
+        }
+
+
         .terminal-body {
+
             padding: 30px;
-            font-family: "Space Mono", monospace;
+
+            font-family:
+                "Space Mono",
+                monospace;
+
             font-size: 14px;
         }
 
 
-        /* =========================
+        /* =====================================================
            SKILLS
-        ========================== */
+        ===================================================== */
 
         .skills-grid {
+
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
             gap: 20px;
         }
 
+
         .skill-card {
+
             padding: 30px;
-            background: var(--card);
-            border: 1px solid var(--border);
+
+            background:
+                rgba(5, 10, 25, 0.72);
+
+            border:
+                1px solid
+                var(--border);
+
             transition: 0.3s;
+
+            backdrop-filter:
+                blur(8px);
         }
+
 
         .skill-card:hover {
-            transform: translateY(-7px);
-            border-color: var(--green);
+
+            transform:
+                translateY(-7px);
+
+            border-color:
+                var(--cyan);
+
+            box-shadow:
+                0 10px 35px
+                rgba(0, 150, 255, 0.12);
         }
+
 
         .skill-icon {
+
             font-size: 35px;
+
             margin-bottom: 15px;
+
+            filter:
+                drop-shadow(
+                    0 0 8px
+                    rgba(0, 200, 255, 0.3)
+                );
         }
 
+
         .skill-card h3 {
+
             margin-bottom: 8px;
         }
 
+
         .skill-card p {
-            color: var(--text-muted);
+
+            color:
+                var(--text-muted);
+
             font-size: 14px;
         }
 
 
-        /* =========================
+        /* =====================================================
            PROJECTS
-        ========================== */
+        ===================================================== */
 
         .projects-grid {
+
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
+
+            grid-template-columns:
+                repeat(2, 1fr);
+
             gap: 25px;
         }
 
+
         .project-card {
+
             position: relative;
+
             padding: 35px;
 
-            border: 1px solid var(--border);
-            background: var(--card);
+            border:
+                1px solid
+                var(--border);
+
+            background:
+                rgba(5, 10, 25, 0.72);
+
+            transition: 0.3s;
+
+            backdrop-filter:
+                blur(8px);
+        }
+
+
+        .project-card:hover {
+
+            transform:
+                translateY(-7px);
+
+            border-color:
+                var(--cyan);
+
+            box-shadow:
+                0 10px 40px
+                rgba(0, 150, 255, 0.12);
+        }
+
+
+        .project-number {
+
+            position: absolute;
+
+            right: 25px;
+            top: 20px;
+
+            color:
+                rgba(0, 229, 255, 0.2);
+
+            font-family:
+                "Space Mono",
+                monospace;
+
+            font-size: 25px;
+        }
+
+
+        .project-icon {
+
+            font-size: 40px;
+
+            margin-bottom: 15px;
+        }
+
+
+        .project-card h3 {
+
+            font-size: 24px;
+        }
+
+
+        .project-card p {
+
+            color:
+                var(--text-muted);
+
+            margin: 15px 0;
+        }
+
+
+        .tech-stack {
+
+            display: flex;
+
+            gap: 8px;
+
+            flex-wrap: wrap;
+
+            margin: 20px 0;
+        }
+
+
+        .tech-stack span {
+
+            padding:
+                5px 10px;
+
+            border:
+                1px solid
+                var(--border);
+
+            color:
+                var(--cyan);
+
+            font-family:
+                "Space Mono",
+                monospace;
+
+            font-size: 11px;
+
+            background:
+                rgba(0, 200, 255, 0.025);
+        }
+
+
+        .project-link {
+
+            color:
+                var(--cyan);
+
+            text-decoration: none;
+
+            font-weight: bold;
 
             transition: 0.3s;
         }
 
-        .project-card:hover {
-            transform: translateY(-7px);
-            border-color: var(--green);
-        }
 
-        .project-number {
-            position: absolute;
-            right: 25px;
-            top: 20px;
+        .project-link:hover {
 
-            color: rgba(0, 255, 156, 0.2);
-            font-family: "Space Mono", monospace;
-            font-size: 25px;
-        }
-
-        .project-icon {
-            font-size: 40px;
-            margin-bottom: 15px;
-        }
-
-        .project-card h3 {
-            font-size: 24px;
-        }
-
-        .project-card p {
-            color: var(--text-muted);
-            margin: 15px 0;
-        }
-
-        .tech-stack {
-            display: flex;
-            gap: 8px;
-            flex-wrap: wrap;
-            margin: 20px 0;
-        }
-
-        .tech-stack span {
-            padding: 5px 10px;
-            border: 1px solid var(--border);
-            color: var(--green);
-            font-family: "Space Mono", monospace;
-            font-size: 11px;
-        }
-
-        .project-link {
-            color: var(--green);
-            text-decoration: none;
-            font-weight: bold;
+            text-shadow:
+                0 0 10px
+                var(--cyan);
         }
 
 
-        /* =========================
+        /* =====================================================
            JOURNEY
-        ========================== */
+        ===================================================== */
 
         .timeline {
+
             position: relative;
+
             max-width: 800px;
         }
 
+
         .timeline::before {
+
             content: "";
+
             position: absolute;
 
             left: 8px;
+
             top: 0;
             bottom: 0;
 
             width: 1px;
-            background: var(--border);
+
+            background:
+                linear-gradient(
+                    to bottom,
+                    var(--cyan),
+                    var(--purple),
+                    transparent
+                );
         }
 
+
         .timeline-item {
+
             position: relative;
+
             padding-left: 50px;
+
             margin-bottom: 45px;
         }
 
+
         .timeline-dot {
+
             position: absolute;
 
             left: 3px;
+
             top: 7px;
 
             width: 11px;
             height: 11px;
 
-            background: var(--green);
+            background:
+                var(--cyan);
+
             border-radius: 50%;
 
-            box-shadow: 0 0 15px var(--green);
+            box-shadow:
+                0 0 15px
+                var(--cyan);
         }
 
+
         .timeline-content span {
-            color: var(--green);
-            font-family: "Space Mono", monospace;
+
+            color:
+                var(--cyan);
+
+            font-family:
+                "Space Mono",
+                monospace;
+
             font-size: 12px;
         }
 
+
         .timeline-content h3 {
+
             margin: 5px 0;
+
             font-size: 22px;
         }
 
+
         .timeline-content p {
-            color: var(--text-muted);
+
+            color:
+                var(--text-muted);
         }
 
 
-        /* =========================
+        /* =====================================================
            CONTACT
-        ========================== */
+        ===================================================== */
 
         .contact-section {
+
             text-align: center;
         }
 
+
         .contact-description {
-            color: var(--text-muted);
+
+            color:
+                var(--text-muted);
+
             max-width: 550px;
-            margin: -20px auto 40px;
+
+            margin:
+                -20px auto 40px;
         }
 
+
         .contact-links {
+
             max-width: 700px;
+
             margin: auto;
 
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
             gap: 15px;
         }
 
+
         .contact-card {
+
             display: flex;
+
             align-items: center;
+
             gap: 12px;
 
             text-align: left;
@@ -577,259 +1612,309 @@
             padding: 18px;
 
             color: white;
+
             text-decoration: none;
 
-            border: 1px solid var(--border);
-            background: var(--card);
+            border:
+                1px solid
+                var(--border);
+
+            background:
+                rgba(5, 10, 25, 0.72);
 
             transition: 0.3s;
+
+            backdrop-filter:
+                blur(8px);
         }
+
 
         .contact-card:hover {
-            border-color: var(--green);
-            transform: translateY(-5px);
+
+            border-color:
+                var(--cyan);
+
+            transform:
+                translateY(-5px);
+
+            box-shadow:
+                0 10px 30px
+                rgba(0, 150, 255, 0.12);
         }
 
+
         .contact-card > span {
+
             font-size: 25px;
         }
 
+
         .contact-card small {
+
             display: block;
-            color: var(--text-muted);
+
+            color:
+                var(--text-muted);
         }
 
+
         .contact-card strong {
+
             font-size: 12px;
         }
 
 
-        /* =========================
+        /* =====================================================
            FOOTER
-        ========================== */
+        ===================================================== */
 
         footer {
+
             padding: 30px 20px;
-            border-top: 1px solid var(--border);
+
+            border-top:
+                1px solid
+                var(--border);
 
             display: flex;
-            justify-content: space-around;
+
+            justify-content:
+                space-around;
+
             flex-wrap: wrap;
 
-            color: var(--text-muted);
+            color:
+                var(--text-muted);
+
             font-size: 13px;
+
+            background:
+                rgba(2, 3, 11, 0.65);
         }
+
 
         footer span {
-            color: var(--green);
+
+            color:
+                var(--cyan);
         }
 
 
-        /* =========================
+        /* =====================================================
            RESPONSIVE
-        ========================== */
+        ===================================================== */
 
         @media (max-width: 850px) {
 
             .nav-links {
+
                 display: none;
 
                 position: absolute;
+
                 top: 70px;
+
                 left: 0;
 
                 width: 100%;
 
                 flex-direction: column;
+
                 align-items: center;
 
-                background: #050807;
+                background:
+                    rgba(2, 4, 14, 0.97);
 
                 padding: 25px;
+
+                border-bottom:
+                    1px solid
+                    var(--border);
             }
 
+
             .nav-links.active {
+
                 display: flex;
             }
 
+
             .menu-btn {
+
                 display: block;
             }
 
+
             .hero {
+
                 flex-direction: column;
+
                 text-align: center;
+
+                padding-top: 130px;
             }
 
+
             .hero-buttons {
+
                 justify-content: center;
             }
 
+
             .hero-visual {
+
                 width: 100%;
             }
 
+
             .about-container {
+
                 grid-template-columns: 1fr;
             }
+
 
             .skills-grid {
-                grid-template-columns: repeat(2, 1fr);
+
+                grid-template-columns:
+                    repeat(2, 1fr);
             }
 
+
             .contact-links {
+
                 grid-template-columns: 1fr;
             }
+
         }
 
 
         @media (max-width: 550px) {
 
             .hero h1 {
+
                 font-size: 45px;
             }
 
+
             .hero h2 {
+
                 font-size: 23px;
             }
 
+
+            .hero-description {
+
+                font-size: 14px;
+            }
+
+
+            .hero-buttons {
+
+                flex-direction: column;
+
+                align-items: center;
+            }
+
+
+            .btn {
+
+                width: 200px;
+            }
+
+
             .skills-grid,
             .projects-grid {
+
                 grid-template-columns: 1fr;
             }
+
 
             .info-box {
-                grid-template-columns: 1fr;
+
+                grid-template-columns:
+                    1fr;
             }
+
 
             .info-box div {
+
                 border-right: none;
-                border-bottom: 1px solid var(--border);
+
+                border-bottom:
+                    1px solid
+                    var(--border);
             }
 
+
             .info-box div:last-child {
+
                 border-bottom: none;
             }
 
+
             .shield {
+
                 width: 220px;
+
                 height: 260px;
             }
 
+
             .code-card {
+
                 position: relative;
+
                 bottom: auto;
+
+                right: auto;
+
                 margin: 20px auto;
+
                 width: fit-content;
+
+                text-align: left;
             }
+
+
+            .hero-visual {
+
+                min-width: 0;
+            }
+
 
             footer {
+
                 flex-direction: column;
+
                 gap: 10px;
+
                 text-align: center;
             }
+
         }
-        .particles span {
-    position: absolute;
-    width: 4px;
-    height: 4px;
-    background: #00ff88;
-    border-radius: 50%;
-    box-shadow: 0 0 10px #00ff88;
-    animation: floatParticle 8s infinite ease-in-out;
-}
 
-.particles span:nth-child(1) {
-    top: 20%;
-    left: 10%;
-}
 
-.particles span:nth-child(2) {
-    top: 40%;
-    left: 25%;
-}
+        /* =====================================================
+           REDUCED MOTION
+        ===================================================== */
 
-.particles span:nth-child(3) {
-    top: 70%;
-    left: 15%;
-}
+        @media (prefers-reduced-motion: reduce) {
 
-.particles span:nth-child(4) {
-    top: 30%;
-    left: 45%;
-}
+            *,
+            *::before,
+            *::after {
 
-.particles span:nth-child(5) {
-    top: 80%;
-    left: 50%;
-}
+                animation-duration:
+                    0.01ms !important;
 
-.particles span:nth-child(6) {
-    top: 15%;
-    left: 70%;
-}
+                animation-iteration-count:
+                    1 !important;
 
-.particles span:nth-child(7) {
-    top: 60%;
-    left: 80%;
-}
+                scroll-behavior:
+                    auto !important;
+            }
 
-.particles span:nth-child(8) {
-    top: 85%;
-    left: 90%;
-}
-
-.particles span:nth-child(9) {
-    top: 50%;
-    left: 60%;
-}
-
-.particles span:nth-child(10) {
-    top: 25%;
-    left: 90%;
-}
-
-.particles span:nth-child(11) {
-    top: 75%;
-    left: 35%;
-}
-
-.particles span:nth-child(12) {
-    top: 10%;
-    left: 35%;
-}
-
-.particles span:nth-child(13) {
-    top: 90%;
-    left: 20%;
-}
-
-.particles span:nth-child(14) {
-    top: 45%;
-    left: 5%;
-}
-
-.particles span:nth-child(15) {
-    top: 65%;
-    left: 70%;
-}
-
-.particles span:nth-child(16) {
-    top: 35%;
-    left: 75%;
-}
-
-@keyframes floatParticle {
-    0%, 100% {
-        transform: translateY(0);
-        opacity: 0.3;
-    }
-
-    50% {
-        transform: translateY(-80px);
-        opacity: 1;
-    }
-}
+        }
 
     </style>
 
@@ -837,45 +1922,100 @@
 
 
 <body>
+
+
+    <!-- =====================================================
+         FUTURISTIC BACKGROUND
+    ===================================================== -->
+
     <div class="cyber-background">
 
-    <div class="cyber-grid"></div>
+        <div class="cyber-grid"></div>
 
-    <div class="glow glow-1"></div>
-    <div class="glow glow-2"></div>
+        <div class="glow glow-1"></div>
 
-</div>
+        <div class="glow glow-2"></div>
 
 
-    <!-- =========================
+        <!-- Floating particles -->
+
+        <div class="particles">
+
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =====================================================
          NAVIGATION
-    ========================== -->
+    ===================================================== -->
 
     <header>
 
         <nav class="navbar">
 
             <a href="#home" class="logo">
-                <span>&lt;</span>BHUMIKA<span>/&gt;</span>
+
+                <span>&lt;</span>
+                BHUMIKA
+                <span>/&gt;</span>
+
             </a>
 
-            <button class="menu-btn" id="menuBtn">
+
+            <button
+                class="menu-btn"
+                id="menuBtn"
+                aria-label="Open navigation menu">
+
                 ☰
+
             </button>
+
 
             <ul class="nav-links" id="navLinks">
 
-                <li><a href="#home">Home</a></li>
+                <li>
+                    <a href="#home">Home</a>
+                </li>
 
-                <li><a href="#about">About</a></li>
+                <li>
+                    <a href="#about">About</a>
+                </li>
 
-                <li><a href="#skills">Skills</a></li>
+                <li>
+                    <a href="#skills">Skills</a>
+                </li>
 
-                <li><a href="#projects">Projects</a></li>
+                <li>
+                    <a href="#projects">Projects</a>
+                </li>
 
-                <li><a href="#journey">Journey</a></li>
+                <li>
+                    <a href="#journey">Journey</a>
+                </li>
 
-                <li><a href="#contact">Contact</a></li>
+                <li>
+                    <a href="#contact">Contact</a>
+                </li>
 
             </ul>
 
@@ -884,41 +2024,65 @@
     </header>
 
 
-    <!-- =========================
+
+    <!-- =====================================================
          HOME
-    ========================== -->
+    ===================================================== -->
 
     <section id="home" class="hero">
 
+
         <div class="hero-content">
 
+
             <p class="terminal-text">
+
                 &gt; initializing portfolio...
+
             </p>
 
+
             <h1>
-                Hi, I'm <span>Bhumika</span>
+
+                Hi, I'm
+                <span>Bhumika</span>
+
             </h1>
 
+
             <h2>
+
                 Cybersecurity Student
+
             </h2>
+
 
             <p class="hero-description">
 
-                I am passionate about cybersecurity, networking,
-                ethical hacking and building secure digital solutions.
+                I am passionate about cybersecurity,
+                networking, ethical hacking and building
+                secure digital solutions.
 
             </p>
 
+
             <div class="hero-buttons">
 
-                <a href="#projects" class="btn primary">
+                <a
+                    href="#projects"
+                    class="btn primary">
+
                     View Projects
+
                 </a>
 
-                <a href="#contact" class="btn secondary">
+
+                <a
+                    href="#contact"
+                    class="btn secondary">
+
                     Contact Me
+
                 </a>
 
             </div>
@@ -926,28 +2090,49 @@
         </div>
 
 
+
+        <!-- HERO VISUAL -->
+
         <div class="hero-visual">
+
 
             <div class="shield">
 
                 <div class="shield-icon">
+
                     🛡️
+
                 </div>
 
             </div>
+
 
             <div class="code-card">
 
                 <p>&gt; whoami</p>
 
                 <p class="green">
+
                     bhumika.b
+
                 </p>
+
+
+                <p>&gt; field</p>
+
+                <p class="green">
+
+                    cybersecurity
+
+                </p>
+
 
                 <p>&gt; status</p>
 
                 <p class="green">
+
                     Learning & Building...
+
                 </p>
 
             </div>
@@ -957,67 +2142,118 @@
     </section>
 
 
-    <!-- =========================
-         ABOUT
-    ========================== -->
 
-    <section id="about" class="section">
+    <!-- =====================================================
+         ABOUT
+    ===================================================== -->
+
+    <section
+        id="about"
+        class="section">
+
 
         <div class="section-title">
 
-            <p>01 // ABOUT ME</p>
+            <p>
+                01 // ABOUT ME
+            </p>
 
-            <h2>Who am I?</h2>
+            <h2>
+                Who am I?
+            </h2>
 
         </div>
 
 
         <div class="about-container">
 
+
             <div class="about-text">
 
-                <p>
-                    I'm <strong>Bhumika B</strong>, a Cybersecurity
-                    Engineering student interested in understanding
-                    how technology can protect people, systems and
-                    digital information.
-                </p>
 
                 <p>
-                    I'm currently developing my knowledge in networking,
-                    Linux, programming, cybersecurity fundamentals and
+
+                    I'm <strong>Bhumika B</strong>,
+                    a Cybersecurity Engineering student
+                    interested in understanding how technology
+                    can protect people, systems and digital
+                    information.
+
+                </p>
+
+
+                <p>
+
+                    I'm currently developing my knowledge
+                    in networking, Linux, programming,
+                    cybersecurity fundamentals and
                     ethical hacking.
+
                 </p>
 
+
                 <p>
-                    My goal is to continuously learn, work on real-world
-                    projects and build a career in cybersecurity.
+
+                    My goal is to continuously learn,
+                    work on real-world projects and
+                    build a career in cybersecurity.
+
                 </p>
+
 
 
                 <div class="info-box">
 
-                    <div>
-                        <span>Education</span>
-                        <strong>BE Cybersecurity</strong>
-                    </div>
 
                     <div>
-                        <span>Interest</span>
-                        <strong>Cybersecurity</strong>
+
+                        <span>
+                            Education
+                        </span>
+
+                        <strong>
+                            BE Cybersecurity
+                        </strong>
+
                     </div>
 
+
                     <div>
-                        <span>Goal</span>
-                        <strong>Security Engineer</strong>
+
+                        <span>
+                            Interest
+                        </span>
+
+                        <strong>
+                            Cybersecurity
+                        </strong>
+
                     </div>
+
+
+                    <div>
+
+                        <span>
+                            Goal
+                        </span>
+
+                        <strong>
+                            Security Engineer
+                        </strong>
+
+                    </div>
+
 
                 </div>
 
             </div>
 
 
+
+            <!-- TERMINAL -->
+
             <div class="about-terminal">
+
 
                 <div class="terminal-header">
 
@@ -1027,43 +2263,77 @@
 
                 </div>
 
+
                 <div class="terminal-body">
 
+
                     <p>
-                        <span class="purple">const</span>
-                        student = {
-                    </p>
 
-                    <p class="indent">
-                        name:
-                        <span class="green">
-                            "Bhumika B"
-                        </span>,
-                    </p>
-
-                    <p class="indent">
-                        field:
-                        <span class="green">
-                            "Cybersecurity"
-                        </span>,
-                    </p>
-
-                    <p class="indent">
-                        passion:
-                        <span class="green">
-                            "Security"
-                        </span>,
-                    </p>
-
-                    <p class="indent">
-                        status:
-                        <span class="green">
-                            "Learning..."
+                        <span class="purple">
+                            const
                         </span>
+
+                        student = {
+
                     </p>
 
+
+                    <p class="indent">
+
+                        name:
+
+                        <span class="green">
+
+                            "Bhumika B"
+
+                        </span>,
+
+                    </p>
+
+
+                    <p class="indent">
+
+                        field:
+
+                        <span class="green">
+
+                            "Cybersecurity"
+
+                        </span>,
+
+                    </p>
+
+
+                    <p class="indent">
+
+                        passion:
+
+                        <span class="green">
+
+                            "Security"
+
+                        </span>,
+
+                    </p>
+
+
+                    <p class="indent">
+
+                        status:
+
+                        <span class="green">
+
+                            "Learning..."
+
+                        </span>
+
+                    </p>
+
+
                     <p>
+
                         };
+
                     </p>
 
                 </div>
@@ -1075,17 +2345,25 @@
     </section>
 
 
-    <!-- =========================
-         SKILLS
-    ========================== -->
 
-    <section id="skills" class="section dark-section">
+    <!-- =====================================================
+         SKILLS
+    ===================================================== -->
+
+    <section
+        id="skills"
+        class="section dark-section">
+
 
         <div class="section-title">
 
-            <p>02 // SKILLS</p>
+            <p>
+                02 // SKILLS
+            </p>
 
-            <h2>What I Work With</h2>
+            <h2>
+                What I Work With
+            </h2>
 
         </div>
 
@@ -1104,10 +2382,12 @@
                 </h3>
 
                 <p>
-                    Security fundamentals, threats and vulnerabilities
+                    Security fundamentals,
+                    threats and vulnerabilities.
                 </p>
 
             </div>
+
 
 
             <div class="skill-card">
@@ -1121,10 +2401,12 @@
                 </h3>
 
                 <p>
-                    TCP/IP, OSI Model, protocols and network security
+                    TCP/IP, OSI Model,
+                    protocols and network security.
                 </p>
 
             </div>
+
 
 
             <div class="skill-card">
@@ -1138,10 +2420,12 @@
                 </h3>
 
                 <p>
-                    Linux fundamentals and cybersecurity environments
+                    Linux fundamentals and
+                    cybersecurity environments.
                 </p>
 
             </div>
+
 
 
             <div class="skill-card">
@@ -1155,10 +2439,12 @@
                 </h3>
 
                 <p>
-                    Programming and cybersecurity-related projects
+                    Programming and
+                    cybersecurity-related projects.
                 </p>
 
             </div>
+
 
 
             <div class="skill-card">
@@ -1172,10 +2458,12 @@
                 </h3>
 
                 <p>
-                    Object-oriented programming and application development
+                    Object-oriented programming
+                    and application development.
                 </p>
 
             </div>
+
 
 
             <div class="skill-card">
@@ -1189,27 +2477,36 @@
                 </h3>
 
                 <p>
-                    HTML, CSS and JavaScript
+                    HTML, CSS and JavaScript.
                 </p>
 
             </div>
+
 
         </div>
 
     </section>
 
 
-    <!-- =========================
-         PROJECTS
-    ========================== -->
 
-    <section id="projects" class="section">
+    <!-- =====================================================
+         PROJECTS
+    ===================================================== -->
+
+    <section
+        id="projects"
+        class="section">
+
 
         <div class="section-title">
 
-            <p>03 // PROJECTS</p>
+            <p>
+                03 // PROJECTS
+            </p>
 
-            <h2>Things I've Built</h2>
+            <h2>
+                Things I've Built
+            </h2>
 
         </div>
 
@@ -1217,140 +2514,209 @@
         <div class="projects-grid">
 
 
+            <!-- PROJECT 1 -->
+
             <article class="project-card">
+
 
                 <div class="project-number">
                     01
                 </div>
 
+
                 <div class="project-icon">
                     🛡️
                 </div>
+
 
                 <h3>
                     SecureMind
                 </h3>
 
+
                 <p>
-                    A cybersecurity education platform designed
-                    to help students and beginners learn cybersecurity
-                    concepts in a simple and interactive way.
+
+                    A cybersecurity education platform
+                    designed to help students and beginners
+                    learn cybersecurity concepts in a simple
+                    and interactive way.
+
                 </p>
+
 
                 <div class="tech-stack">
 
                     <span>Flutter</span>
+
                     <span>Python</span>
+
                     <span>Flask</span>
 
                 </div>
 
-                <a href="#" class="project-link">
+
+                <a
+                    href="#"
+                    class="project-link">
+
                     View Project →
+
                 </a>
 
             </article>
 
 
+
+            <!-- PROJECT 2 -->
+
             <article class="project-card">
+
 
                 <div class="project-number">
                     02
                 </div>
 
+
                 <div class="project-icon">
                     🔎
                 </div>
+
 
                 <h3>
                     Cyber Threat Analyzer
                 </h3>
 
+
                 <p>
-                    A cybersecurity project designed to analyze
-                    potential threats and provide useful security
-                    information.
+
+                    A cybersecurity project designed
+                    to analyze potential threats and provide
+                    useful security information.
+
                 </p>
+
 
                 <div class="tech-stack">
 
                     <span>Python</span>
+
                     <span>Cybersecurity</span>
+
                     <span>Analysis</span>
 
                 </div>
 
-                <a href="#" class="project-link">
+
+                <a
+                    href="#"
+                    class="project-link">
+
                     View Project →
+
                 </a>
 
             </article>
 
 
+
+            <!-- PROJECT 3 -->
+
             <article class="project-card">
+
 
                 <div class="project-number">
                     03
                 </div>
 
+
                 <div class="project-icon">
                     📱
                 </div>
+
 
                 <h3>
                     QR Secure ID
                 </h3>
 
+
                 <p>
-                    A secure identity concept using QR technology,
-                    inspired by traditional identity verification
-                    methods.
+
+                    A secure identity concept using QR
+                    technology, inspired by traditional
+                    identity verification methods.
+
                 </p>
+
 
                 <div class="tech-stack">
 
                     <span>QR</span>
+
                     <span>Security</span>
+
                     <span>Web</span>
 
                 </div>
 
-                <a href="#" class="project-link">
+
+                <a
+                    href="#"
+                    class="project-link">
+
                     View Project →
+
                 </a>
 
             </article>
 
 
+
+            <!-- PROJECT 4 -->
+
             <article class="project-card">
+
 
                 <div class="project-number">
                     04
                 </div>
 
+
                 <div class="project-icon">
                     🌋
                 </div>
+
 
                 <h3>
                     Landslide Prediction
                 </h3>
 
+
                 <p>
-                    A project focused on predicting landslide risks
-                    using environmental data and technology.
+
+                    A project focused on predicting
+                    landslide risks using environmental
+                    data and technology.
+
                 </p>
+
 
                 <div class="tech-stack">
 
                     <span>AI</span>
+
                     <span>Python</span>
+
                     <span>IoT</span>
 
                 </div>
 
-                <a href="#" class="project-link">
+
+                <a
+                    href="#"
+                    class="project-link">
+
                     View Project →
+
                 </a>
 
             </article>
@@ -1361,15 +2727,21 @@
     </section>
 
 
-    <!-- =========================
-         LEARNING JOURNEY
-    ========================== -->
 
-    <section id="journey" class="section dark-section">
+    <!-- =====================================================
+         LEARNING JOURNEY
+    ===================================================== -->
+
+    <section
+        id="journey"
+        class="section dark-section">
+
 
         <div class="section-title">
 
-            <p>04 // JOURNEY</p>
+            <p>
+                04 // JOURNEY
+            </p>
 
             <h2>
                 My Learning Journey
@@ -1387,20 +2759,25 @@
 
                 <div class="timeline-content">
 
-                    <span>01</span>
+                    <span>
+                        01
+                    </span>
 
                     <h3>
                         Programming
                     </h3>
 
                     <p>
-                        Started learning programming fundamentals
-                        and problem solving.
+
+                        Started learning programming
+                        fundamentals and problem solving.
+
                     </p>
 
                 </div>
 
             </div>
+
 
 
             <div class="timeline-item">
@@ -1409,20 +2786,25 @@
 
                 <div class="timeline-content">
 
-                    <span>02</span>
+                    <span>
+                        02
+                    </span>
 
                     <h3>
                         Networking
                     </h3>
 
                     <p>
-                        Learning computer networks, protocols,
-                        OSI model and TCP/IP.
+
+                        Learning computer networks,
+                        protocols, OSI model and TCP/IP.
+
                     </p>
 
                 </div>
 
             </div>
+
 
 
             <div class="timeline-item">
@@ -1431,20 +2813,25 @@
 
                 <div class="timeline-content">
 
-                    <span>03</span>
+                    <span>
+                        03
+                    </span>
 
                     <h3>
                         Linux & Kali Linux
                     </h3>
 
                     <p>
-                        Exploring Linux environments and
-                        cybersecurity tools.
+
+                        Exploring Linux environments
+                        and cybersecurity tools.
+
                     </p>
 
                 </div>
 
             </div>
+
 
 
             <div class="timeline-item">
@@ -1453,15 +2840,19 @@
 
                 <div class="timeline-content">
 
-                    <span>04</span>
+                    <span>
+                        04
+                    </span>
 
                     <h3>
                         CTF & Ethical Hacking
                     </h3>
 
                     <p>
+
                         Beginning my journey into CTFs,
                         ethical hacking and security testing.
+
                     </p>
 
                 </div>
@@ -1474,15 +2865,21 @@
     </section>
 
 
-    <!-- =========================
-         CONTACT
-    ========================== -->
 
-    <section id="contact" class="section contact-section">
+    <!-- =====================================================
+         CONTACT
+    ===================================================== -->
+
+    <section
+        id="contact"
+        class="section contact-section">
+
 
         <div class="section-title">
 
-            <p>05 // CONTACT</p>
+            <p>
+                05 // CONTACT
+            </p>
 
             <h2>
                 Let's Connect
@@ -1502,17 +2899,26 @@
         <div class="contact-links">
 
 
-            <a href="mailto:bhumkikabala2458@gmail.com"
-               class="contact-card">
+            <!-- EMAIL -->
 
-                <span>📧</span>
+            <a
+                href="mailto:bhumkikabala2458@gmail.com"
+                class="contact-card">
+
+
+                <span>
+                    📧
+                </span>
+
 
                 <div>
 
-                    <small>Email</small>
+                    <small>
+                        Email
+                    </small>
 
                     <strong>
-                        yourmail@gmail.com
+                        bhumkikabala2458@gmail.com
                     </strong>
 
                 </div>
@@ -1520,15 +2926,26 @@
             </a>
 
 
-            <a href="https://github.com/"
-               target="_blank"
-               class="contact-card">
 
-                <span>🐙</span>
+            <!-- GITHUB -->
+
+            <a
+                href="https://github.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="contact-card">
+
+
+                <span>
+                    🐙
+                </span>
+
 
                 <div>
 
-                    <small>GitHub</small>
+                    <small>
+                        GitHub
+                    </small>
 
                     <strong>
                         My GitHub
@@ -1539,15 +2956,26 @@
             </a>
 
 
-            <a href="https://www.linkedin.com/"
-               target="_blank"
-               class="contact-card">
 
-                <span>💼</span>
+            <!-- LINKEDIN -->
+
+            <a
+                href="https://www.linkedin.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="contact-card">
+
+
+                <span>
+                    💼
+                </span>
+
 
                 <div>
 
-                    <small>LinkedIn</small>
+                    <small>
+                        LinkedIn
+                    </small>
 
                     <strong>
                         My LinkedIn
@@ -1563,38 +2991,53 @@
     </section>
 
 
-    <!-- =========================
+
+    <!-- =====================================================
          FOOTER
-    ========================== -->
+    ===================================================== -->
 
     <footer>
 
+
         <p>
+
             <span>&lt;</span>
+
             Bhumika B
+
             <span>/&gt;</span>
+
         </p>
 
+
         <p>
+
             Built with curiosity & code.
+
         </p>
 
+
         <p>
+
             © 2026 Bhumika B
+
         </p>
+
 
     </footer>
 
 
-    <!-- =========================
+
+    <!-- =====================================================
          JAVASCRIPT
-    ========================== -->
+    ===================================================== -->
 
     <script>
 
-        // ============================
-        // MOBILE MENU
-        // ============================
+
+        /* =================================================
+           MOBILE MENU
+        ================================================= */
 
         const menuBtn =
             document.getElementById("menuBtn");
@@ -1603,34 +3046,47 @@
             document.getElementById("navLinks");
 
 
-        menuBtn.addEventListener("click", () => {
+        menuBtn.addEventListener(
+            "click",
+            () => {
 
-            navLinks.classList.toggle("active");
+                navLinks.classList.toggle(
+                    "active"
+                );
 
-        });
+            }
+        );
 
 
-        // Close menu after clicking a link
+        /* Close menu after clicking */
 
         document
             .querySelectorAll(".nav-links a")
             .forEach(link => {
 
-                link.addEventListener("click", () => {
+                link.addEventListener(
+                    "click",
+                    () => {
 
-                    navLinks.classList.remove("active");
+                        navLinks.classList.remove(
+                            "active"
+                        );
 
-                });
+                    }
+                );
 
             });
 
 
-        // ============================
-        // TERMINAL TYPING MESSAGE
-        // ============================
+
+        /* =================================================
+           TERMINAL TYPING MESSAGE
+        ================================================= */
 
         const terminalText =
-            document.querySelector(".terminal-text");
+            document.querySelector(
+                ".terminal-text"
+            );
 
 
         const messages = [
@@ -1641,6 +3097,8 @@
 
             "> accessing secure environment...",
 
+            "> scanning digital environment...",
+
             "> welcome to Bhumika's portfolio..."
 
         ];
@@ -1649,28 +3107,39 @@
         let messageIndex = 0;
 
 
-        setInterval(() => {
+        setInterval(
+            () => {
 
-            messageIndex++;
+                messageIndex++;
 
-            if (messageIndex >= messages.length) {
+                if (
+                    messageIndex >=
+                    messages.length
+                ) {
 
-                messageIndex = 0;
+                    messageIndex = 0;
 
-            }
-
-            terminalText.textContent =
-                messages[messageIndex];
-
-        }, 3000);
+                }
 
 
-        // ============================
-        // SCROLL REVEAL
-        // ============================
+                terminalText.textContent =
+                    messages[messageIndex];
+
+            },
+
+            3000
+        );
+
+
+
+        /* =================================================
+           SCROLL REVEAL
+        ================================================= */
 
         const sections =
-            document.querySelectorAll(".section");
+            document.querySelectorAll(
+                ".section"
+            );
 
 
         const observer =
@@ -1678,18 +3147,23 @@
 
                 entries => {
 
-                    entries.forEach(entry => {
+                    entries.forEach(
+                        entry => {
 
-                        if (entry.isIntersecting) {
+                            if (
+                                entry.isIntersecting
+                            ) {
 
-                            entry.target.style.opacity = "1";
+                                entry.target.style.opacity =
+                                    "1";
 
-                            entry.target.style.transform =
-                                "translateY(0)";
+                                entry.target.style.transform =
+                                    "translateY(0)";
+
+                            }
 
                         }
-
-                    });
+                    );
 
                 },
 
@@ -1700,21 +3174,26 @@
             );
 
 
-        sections.forEach(section => {
+        sections.forEach(
+            section => {
 
-            section.style.opacity = "0";
+                section.style.opacity =
+                    "0";
 
-            section.style.transform =
-                "translateY(30px)";
+                section.style.transform =
+                    "translateY(30px)";
 
-            section.style.transition =
-                "opacity 0.8s ease, transform 0.8s ease";
+                section.style.transition =
+                    "opacity 0.8s ease, transform 0.8s ease";
 
-            observer.observe(section);
+                observer.observe(section);
 
-        });
+            }
+        );
+
 
     </script>
+
 
 </body>
 
